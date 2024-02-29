@@ -25,13 +25,13 @@ Nginx est déja inclu dans le compose docker mais est pour l'instant commenté.
 
 Lancer Docker ou Docker Desktop
 
-Mettez vous à la Racine du projet et exectuer
+Mettez vous à la Racine du projet et exectuez
 
 ```
 docker compose up --build
 ```
 
-Une fois les images construites et les containers crées vous tout est pret !
+Une fois les images construites et les containers crées, tout est pret !
 
 * Backend : http://localhost:8200/
 * Frontend : http://localhost:8300/
