@@ -8,7 +8,7 @@ services:
     ports:
       - "8200:8000"
     depends_on:
-      - mysql
+      - db
     environment:
       - MYSQL_HOST=mysql
       - MYSQL_USER=root
@@ -41,9 +41,16 @@ services:
   #     - backend
   #     - frontend
 
-  mysql:
-    image: mysql:latest
-    restart: always
+  db:
+    image: bitnami/mariadb:latest
+    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test_fastapi_vuejs
+      # MYSQL_USER: lukyss
+      # MYSQL_PASSWORD: root
+      # MYSQL_DATABASE: cyka
+      # MYSQL_ROOT_PASSWORD: rootpassword
+      ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./init_db/:/docker-entrypoint-initdb.d/"
