@@ -9,21 +9,13 @@ from starlette.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "http://frontend:3000",
-    "http://frontend:3000/",
-    "http://localhost:8300",
-    "http://localhost:8300/",
-    "http://bakcend:8000",
-    "http://0.0.0.0:3000",
-    "http://0.0.0.0:8000",
-    "http://0.0.0.0:8300",
-    "http://0.0.0.0:8200",
+    "http://localhost:8300", # Fonctionne =)
 ]
 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Remplace * par l'URL de ton frontend en production
+    allow_origins=origins,  # Remplace * par l'URL de ton frontend en production
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
