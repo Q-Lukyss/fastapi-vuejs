@@ -2,28 +2,33 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import mariadb
 import sys
-from fastapi.middleware.cors import CORSMiddleware
+# from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 origins = [
-    "http://localhost:8200/",
-    "http://localhost:8200/api/auteurs",
-    "http://localhost:8300/auteurs",
+    "http://frontend:3000",
+    "http://frontend:3000/",
+    "http://localhost:8300",
     "http://localhost:8300/",
-    "http://backend:8000/api/auteurs",
-    "http://backend:8200/",
+    "http://bakcend:8000",
+    "http://0.0.0.0:3000",
+    "http://0.0.0.0:8000",
+    "http://0.0.0.0:8300",
+    "http://0.0.0.0:8200",
 ]
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # Permettre l'accès depuis toutes les origines
+    allow_origins=["*"],  # Remplace * par l'URL de ton frontend en production
     allow_credentials=True,
-    allow_methods=["*"],  # Autoriser ces méthodes
-    allow_headers=["*"],  # Autoriser tous les en-têtes
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
 )
-# Middleware pour les logs détaillés
+# # Middleware pour les logs détaillés
 # class LoggingMiddleware(BaseHTTPMiddleware):
 #     async def dispatch(self, request, call_next):
 #         # Log des détails de la requête entrante
@@ -67,11 +72,11 @@ def get_cursor(conn):
 
 
 @app.get("/")
-def read_root():
+async def read_root():
     return {"Message": "Hello World"}
 
 @app.get("/test")
-def read_test():
+async def read_test():
     return {"Test": "ceci est un test"}
 
 # Modèle Pydantic pour représenter les données
