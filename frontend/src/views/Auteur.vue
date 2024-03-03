@@ -34,7 +34,7 @@ export default {
     getData() {
       axios
         // .get('http://backend:8000/api/auteurs') marche pas
-        .get('http://localhost:8200/api/auteurs') // fonctionne parfaitement
+        .get('http://localhost:8200/api/auteurs') // fonctionne parfaitement peut etre parce que j'ai utilisé l'ip du réseau avant
         .then(response => {
           this.auteurs_list = response.data
           // console.log('Succes ' + response.data)
